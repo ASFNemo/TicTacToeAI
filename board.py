@@ -2,12 +2,12 @@ from copy import deepcopy
 
 
 EMPTY = 0
-HUMAN = 1
-COMPUTER = 2
+PLAYER1 = 1
+PLAYER2 = 2
 
 
 class Board(object):
-    whos_turn = HUMAN
+    whos_turn = PLAYER1
     board = []
     max_width = 3
     max_height = 3
@@ -63,10 +63,10 @@ class Board(object):
         """
         Shitches and returns next player who's turn.
         """
-        if self.whos_turn == HUMAN:
-            self.whos_turn = COMPUTER
+        if self.whos_turn == PLAYER1:
+            self.whos_turn = PLAYER2
         else:
-            self.whos_turn = HUMAN
+            self.whos_turn = PLAYER1
         return self.whos_turn
 
     def owner_of(self, x, y):
@@ -90,7 +90,7 @@ class Board(object):
 
     def get_winner(self):
         """
-        Returns None if board has no winner yet or returns HUMAN or COMPUTER
+        Returns None if board has no winner yet or returns PLAYER1 or PLAYER2
         if winner exists.
         """
         for x in range(self.max_width):
@@ -156,10 +156,10 @@ class Board(object):
             if self.evaluate_move(move[0], move[1], player) == 1:
                 return move
 
-        if player == HUMAN:
-            opponent = COMPUTER
+        if player == PLAYER1:
+            opponent = PLAYER2
         else:
-            opponent = HUMAN
+            opponent = PLAYER1
         for move in valid_moves:
             if self.evaluate_move(move[0], move[1], opponent) == 1:
                 return move
